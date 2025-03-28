@@ -23,7 +23,18 @@ function patch(req, res) {
 function destroy(req, res) {
     const selectedPost = posts.find((el) => el.id === parseInt(req.params.id))
     posts.splice(posts.indexOf(selectedPost), 1)
-    res.json(posts)
+
+    if (!selectedPost) {
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not found",
+            message: "Post not found"
+        })
+    }
+
+    res.sendStatus(204)
 }
 
 module.exports = { index, show, store, update, patch, destroy }
