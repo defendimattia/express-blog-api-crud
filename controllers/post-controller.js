@@ -5,7 +5,7 @@ function index(req, res) {
 }
 
 function show(req, res) {
-    res.send(`Post ${req.params.id} details`)
+    res.json(posts.find((el) => el.id === parseInt(req.params.id)))
 }
 
 function store(req, res) {
