@@ -21,7 +21,9 @@ function patch(req, res) {
 }
 
 function destroy(req, res) {
-    res.send(`Post ${req.params.id} deleted`)
+    const selectedPost = posts.find((el) => el.id === parseInt(req.params.id))
+    posts.splice(posts.indexOf(selectedPost), 1)
+    res.json(posts)
 }
 
 module.exports = { index, show, store, update, patch, destroy }
