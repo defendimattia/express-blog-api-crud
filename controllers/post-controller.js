@@ -1,7 +1,15 @@
 const posts = require("../data/posts")
 
 function index(req, res) {
-    res.json(posts)
+    let filteredPosts = posts
+    console.log(req.query.tag)
+
+    if (req.query.tag) {
+        filteredPosts = posts.filter(post => post.tags.includes(req.query.tag)
+        )
+    }
+
+    res.json(filteredPosts)
 }
 
 function show(req, res) {
@@ -34,7 +42,7 @@ function patch(req, res) {
 
 function destroy(req, res) {
     const selectedPost = posts.find((el) => el.id === parseInt(req.params.id))
-    
+
 
     if (!selectedPost) {
         res.status(404)
