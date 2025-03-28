@@ -22,7 +22,7 @@ function patch(req, res) {
 
 function destroy(req, res) {
     const selectedPost = posts.find((el) => el.id === parseInt(req.params.id))
-    posts.splice(posts.indexOf(selectedPost), 1)
+    
 
     if (!selectedPost) {
         res.status(404)
@@ -34,6 +34,8 @@ function destroy(req, res) {
         })
     }
 
+    posts.splice(posts.indexOf(selectedPost), 1)
+    
     res.sendStatus(204)
 }
 
