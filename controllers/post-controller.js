@@ -5,7 +5,19 @@ function index(req, res) {
 }
 
 function show(req, res) {
-    res.json(posts.find((el) => el.id === parseInt(req.params.id)))
+    const selectedPost = posts.find((el) => el.id === parseInt(req.params.id))
+
+    if (!selectedPost) {
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not found",
+            message: "Post not found"
+        })
+    }
+
+    res.json(selectedPost)
 }
 
 function store(req, res) {
@@ -35,7 +47,7 @@ function destroy(req, res) {
     }
 
     posts.splice(posts.indexOf(selectedPost), 1)
-    
+
     res.sendStatus(204)
 }
 
