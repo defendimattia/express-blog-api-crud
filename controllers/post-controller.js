@@ -29,7 +29,21 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send("Created new post")
+    const newId = posts.at(-1).id + 1
+
+    const newPost = {
+
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+
+    }
+
+    posts.push(newPost)
+
+    res.send(`Created new post with id: ${newId}`)
 }
 
 function update(req, res) {
