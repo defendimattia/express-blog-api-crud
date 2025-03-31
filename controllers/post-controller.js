@@ -47,11 +47,30 @@ function store(req, res) {
 }
 
 function update(req, res) {
-    res.send(`Post ${req.params.id} full edit`)
+    const selectedPost = posts.find((el) => el.id === parseInt(req.params.id))
+
+
+    if (!selectedPost) {
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not found",
+            message: "Post not found"
+        })
+    }
+
+    selectedPost.title = req.body.title
+    selectedPost.content = req.body.content
+    selectedPost.image = req.body.image
+    selectedPost.tags = req.body.tags
+
+    console.log(`Post with id: ${req.params.id}, full edit`)
+    res.json(posts)
 }
 
 function patch(req, res) {
-    res.send(`Post ${req.params.id} partial edit`)
+    res.send(`Post with id: ${req.params.id}, partial edit`)
 }
 
 function destroy(req, res) {
@@ -72,5 +91,8 @@ function destroy(req, res) {
 
     res.sendStatus(204)
 }
+
+
+
 
 module.exports = { index, show, store, update, patch, destroy }
