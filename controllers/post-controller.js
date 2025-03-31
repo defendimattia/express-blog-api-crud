@@ -70,7 +70,26 @@ function update(req, res) {
 }
 
 function patch(req, res) {
-    res.send(`Post with id: ${req.params.id}, partial edit`)
+    const selectedPost = posts.find((el) => el.id === parseInt(req.params.id))
+
+
+    if (!selectedPost) {
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not found",
+            message: "Post not found"
+        })
+    }
+
+    if (req.body.title) selectedPost.title = req.body.title
+    if (req.body.content) selectedPost.content = req.body.content
+    if (req.body.image) selectedPost.image = req.body.image
+    if (req.body.tags) selectedPost.tags = req.body.tags
+
+    console.log(`Post with id: ${req.params.id}, partial edit`)
+    res.json(posts)
 }
 
 function destroy(req, res) {
