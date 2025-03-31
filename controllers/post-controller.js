@@ -43,7 +43,7 @@ function store(req, res) {
 
     posts.push(newPost)
 
-    res.send(`Created new post with id: ${newId}`)
+    res.status(201).send(`Created new post with id: ${newId}`)
 }
 
 function update(req, res) {
