@@ -2,7 +2,6 @@ const posts = require("../data/posts")
 
 function index(req, res) {
     let filteredPosts = posts
-    console.log(req.query.tag)
 
     if (req.query.tag) {
         filteredPosts = posts.filter(post => post.tags.includes(req.query.tag)

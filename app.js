@@ -7,7 +7,6 @@ const port = 3000
 
 // importa il router dei post
 const postsRouter = require("./routers/posts-router")
-
 // importa middleware
 const notFound = require("./middleware/not-found")
 
