@@ -7,7 +7,7 @@ function index(req, res) {
         filteredPosts = posts.filter(post => post.tags.includes(req.query.tag)
         )
     }
-
+    
     res.json(filteredPosts)
 }
 
@@ -23,7 +23,7 @@ function show(req, res) {
             message: "Post not found"
         })
     }
-
+    
     res.json(selectedPost)
 }
 
